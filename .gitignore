@@ -16,3 +16,4 @@ t.*
 *.pid
 build
 .idea
+cmake-build-*
