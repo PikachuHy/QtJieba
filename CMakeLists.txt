@@ -1,28 +1,26 @@
-PROJECT(CPPJIEBA)
+project(QtJieba LANGUAGES CXX)
 
-CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
+cmake_minimum_required(VERSION 3.15)
 
-INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/deps
-  ${PROJECT_SOURCE_DIR}/include)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+if (UNIX)
+    if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+        set(CMAKE_INSTALL_PREFIX "/usr/local/cppjieba" CACHE PATH "default install path" FORCE)
+    endif ()
+    add_definitions(-O3 -Wall -g)
+endif ()
 
-if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-    set (CMAKE_INSTALL_PREFIX "/usr/local/cppjieba" CACHE PATH "default install path" FORCE )
-endif()
+if (APPLE) # mac os
+    add_definitions(-std=c++0x)
+endif ()
 
-ADD_DEFINITIONS(-O3 -Wall -g)
-IF(APPLE) # mac os
-    ADD_DEFINITIONS(-std=c++0x)
-endif()
-
-# cmake .. -DENC=GBK
-# IF (DEFINED ENC)
-#     ADD_DEFINITIONS(-DCPPJIEBA_${ENC})
-# ENDIF()
-
-ADD_SUBDIRECTORY(deps)
-ADD_SUBDIRECTORY(test)
-
-ENABLE_TESTING()
-ADD_TEST(NAME ./test/test.run COMMAND ./test/test.run)
-ADD_TEST(NAME ./load_test COMMAND ./load_test)
-ADD_TEST(NAME ./demo COMMAND ./demo)
+option(BUILD_TEST "Build unit test" OFF)
+if (BUILD_TEST)
+    enable_testing()
+    add_subdirectory(deps)
+    add_subdirectory(test)
+    add_test(NAME ./test/test.run COMMAND ./test/test.run)
+    add_test(NAME ./load_test COMMAND ./load_test)
+    add_test(NAME ./demo COMMAND ./demo)
+endif ()
