@@ -102,12 +102,16 @@ inline std::string& Trim(std::string &s) {
 }
 
 inline std::string& LTrim(std::string & s, char x) {
-  s.erase(s.begin(), std::find_if(s.begin(), s.end(), std::not1(std::bind2nd(std::equal_to<char>(), x))));
+  s.erase(s.begin(), std::find_if(s.begin(), s.end(), [x](char ch) {
+      return ch != x;
+  }));
   return s;
 }
 
 inline std::string& RTrim(std::string & s, char x) {
-  s.erase(std::find_if(s.rbegin(), s.rend(), std::not1(std::bind2nd(std::equal_to<char>(), x))).base(), s.end());
+  s.erase(std::find_if(s.rbegin(), s.rend(), [x](char ch) {
+      return ch != x;
+  }).base(), s.end());
   return s;
 }
 
