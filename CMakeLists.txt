@@ -24,3 +24,13 @@ if (BUILD_TEST)
     add_test(NAME ./load_test COMMAND ./load_test)
     add_test(NAME ./demo COMMAND ./demo)
 endif ()
+find_package(QT NAMES Qt6 Qt5 COMPONENTS Core REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS
+        Core
+        REQUIRED)
+add_library(QtJieba SHARED Tokenizer.cpp)
+target_compile_definitions(QtJieba PRIVATE -DQtJieba_LIBRARY)
+target_link_libraries(QtJieba PUBLIC Qt${QT_VERSION_MAJOR}::Core)
+target_include_directories(QtJieba PRIVATE include deps)
+add_executable(QtJiebaMain main.cpp)
+target_link_libraries(QtJiebaMain PRIVATE QtJieba)
