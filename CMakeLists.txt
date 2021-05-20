@@ -30,6 +30,7 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS
         REQUIRED)
 add_library(QtJieba SHARED Tokenizer.cpp)
 target_compile_definitions(QtJieba PRIVATE -DQtJieba_LIBRARY)
+target_compile_definitions(QtJieba PRIVATE -D_CRT_SECURE_NO_WARNINGS)
 target_link_libraries(QtJieba PUBLIC Qt${QT_VERSION_MAJOR}::Core)
 target_include_directories(QtJieba PRIVATE include deps)
 add_executable(QtJiebaMain main.cpp)
