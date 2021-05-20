@@ -175,7 +175,7 @@ class HMMSegment: public SegmentBase {
     }
 
     status.resize(X);
-    for (int x = X -1 ; x >= 0; x--) {
+    for (int x = static_cast<int>(X) -1 ; x >= 0; x--) {
       status[x] = stat;
       stat = path[x + stat*X];
     }
