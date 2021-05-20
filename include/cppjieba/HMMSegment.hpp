@@ -159,7 +159,7 @@ class HMMSegment: public SegmentBase {
           tmp = weight[old] + model_->transProb[preY][y] + emitProb;
           if (tmp > weight[now]) {
             weight[now] = tmp;
-            path[now] = preY;
+            path[now] = static_cast<int>(preY);
           }
         }
       }
