@@ -32,7 +32,9 @@ add_library(QtJieba SHARED Tokenizer.cpp)
 target_compile_definitions(QtJieba PRIVATE -DQtJieba_LIBRARY)
 target_compile_definitions(QtJieba PRIVATE -D_CRT_SECURE_NO_WARNINGS)
 target_link_libraries(QtJieba PUBLIC Qt${QT_VERSION_MAJOR}::Core)
-target_include_directories(QtJieba PRIVATE include deps)
+target_include_directories(QtJieba PRIVATE include deps
+        INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}
+        )
 if (${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_LIST_DIR})
     if (ANDROID)
         message(STATUS "andorid abi ${CMAKE_ANDROID_ARCH_ABI}")
