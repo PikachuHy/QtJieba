@@ -41,10 +41,10 @@ if (${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_LIST_DIR})
         set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/android-build/libs/${CMAKE_ANDROID_ARCH_ABI}/)
         set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/android-build/libs/${CMAKE_ANDROID_ARCH_ABI}/)
     endif ()
-qt_add_executable(QtJiebaMain
-        MANUAL_FINALIZATION
-        main.cpp
-        )
-qt_finalize_executable(QtJiebaMain)
-target_link_libraries(QtJiebaMain PRIVATE QtJieba)
-endif()
+    qt_add_executable(QtJiebaMain
+            MANUAL_FINALIZATION
+            main.cpp
+            )
+    qt_finalize_executable(QtJiebaMain)
+    target_link_libraries(QtJiebaMain PRIVATE QtJieba)
+endif ()
